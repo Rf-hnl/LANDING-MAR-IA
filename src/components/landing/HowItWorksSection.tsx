@@ -36,7 +36,7 @@ export function HowItWorksSection() {
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">Empieza a vender en 4 simples pasos</h2>
-            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+            <p className="mx-auto max-w-[700px] text-muted-foreground light:gray-500 md:text-xl/relaxed">
               Nuestra plataforma está diseñada para ser intuitiva y fácil de implementar.
             </p>
         </div>
@@ -51,7 +51,7 @@ export function HowItWorksSection() {
                     <Icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold">{step.title}</h3>
-                  <p className="text-muted-foreground">{step.description}</p>
+                  <p className="text-muted-foreground light:gray-500">{step.description}</p>
                 </Card>
               );
             })}

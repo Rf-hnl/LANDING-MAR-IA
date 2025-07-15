@@ -16,7 +16,7 @@ export function Footer() {
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
-            <div key={feature.name} className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+            <div key={feature.name} className="flex items-center gap-2 text-muted-foreground light:gray-500 hover:text-primary transition-colors cursor-pointer">
               <Icon className="h-4 w-4" />
               <span className="font-medium text-xs tracking-wide">{feature.name}</span>
             </div>

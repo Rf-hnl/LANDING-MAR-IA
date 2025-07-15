@@ -52,7 +52,7 @@ export function FeaturesSection() {
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">
             Funcionalidades Avanzadas
           </h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+          <p className="mx-auto max-w-[700px] text-muted-foreground light:gray-500 md:text-xl/relaxed">
             Descubre todas las herramientas que MAR-IA pone a tu disposición para revolucionar tu negocio.
           </p>
         </div>
@@ -71,7 +71,7 @@ export function FeaturesSection() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-muted-foreground light:gray-500 leading-relaxed">
                     {feature.description}
                   </p>
                 </CardContent>

@@ -47,7 +47,7 @@ export function CopyImprover() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       heroTitle: "Impulsa tus ventas con Inteligencia Artificial",
-      heroSubtitle: "El CRM inteligente diseñado para pymes de habla hispana",
+      heroSubtitle: "El AGENTE DE IA de ventas inteligente diseñado para pymes de habla hispana",
       featureDescriptions: "Gestión de leads inteligente\nAutomatización de tareas\nIntegración multicanal",
       callToAction: "Solicita una Demo",
     },
@@ -143,29 +143,29 @@ export function CopyImprover() {
                   <div className="space-y-4 text-sm">
                     <div>
                         <h4 className="font-semibold">Título Principal</h4>
-                        <p className="text-muted-foreground">{result.improvedHeroTitle}</p>
+                        <p className="text-muted-foreground light:gray-500">{result.improvedHeroTitle}</p>
                     </div>
                     <Separator/>
                     <div>
                         <h4 className="font-semibold">Subtítulo</h4>
-                        <p className="text-muted-foreground">{result.improvedHeroSubtitle}</p>
+                        <p className="text-muted-foreground light:gray-500">{result.improvedHeroSubtitle}</p>
                     </div>
                     <Separator/>
                     <div>
                         <h4 className="font-semibold">Características</h4>
-                        <ul className="list-disc list-inside text-muted-foreground">
+                        <ul className="list-disc list-inside text-muted-foreground light:gray-500">
                             {result.improvedFeatureDescriptions.map((desc, i) => <li key={i}>{desc}</li>)}
                         </ul>
                     </div>
                     <Separator/>
                     <div>
                         <h4 className="font-semibold">Llamada a la Acción (CTA)</h4>
-                        <p className="text-muted-foreground">{result.improvedCallToAction}</p>
+                        <p className="text-muted-foreground light:gray-500">{result.improvedCallToAction}</p>
                     </div>
                   </div>
                 )}
                 {!isLoading && !result && (
-                    <div className="text-center text-muted-foreground h-64 flex flex-col items-center justify-center">
+                    <div className="text-center text-muted-foreground light:gray-500 h-64 flex flex-col items-center justify-center">
                         <p>Los resultados aparecerán aquí.</p>
                     </div>
                 )}

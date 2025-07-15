@@ -67,7 +67,7 @@ export function LeadFormSection() {
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">¿Listo para empezar?</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+          <p className="mx-auto max-w-[700px] text-muted-foreground light:gray-500 md:text-xl/relaxed">
             Completa el formulario para solicitar una demo personalizada o recibir más información.
           </p>
         </div>
@@ -148,7 +148,7 @@ export function LeadFormSection() {
                   <Button type="submit" size="lg" className="w-full sm:w-auto rounded-full" disabled={loading}>
                     {loading ? "Enviando..." : "Solicitar Información"}
                   </Button>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground light:gray-500">
                     Al enviar, aceptas nuestra Política de Privacidad. Respetamos tu información.
                   </p>
                 </div>

@@ -46,7 +46,7 @@ export function BenefitsSection() {
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">Potencia tus Ventas con Acciones de IA</h2>
-            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+            <p className="mx-auto max-w-[700px] text-muted-foreground light:gray-500 md:text-xl/relaxed">
               Desde la obtención del dato hasta el cierre, MAR-IA te acompaña con inteligencia artificial.
             </p>
         </div>
@@ -59,7 +59,7 @@ export function BenefitsSection() {
                     <Icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
-                  <p className="text-muted-foreground">{benefit.description}</p>
+                  <p className="text-muted-foreground light:gray-500">{benefit.description}</p>
               </div>
             );
           })}

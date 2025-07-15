@@ -52,7 +52,7 @@ export function PricingSection() {
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">Un plan para cada necesidad</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+          <p className="mx-auto max-w-[700px] text-muted-foreground light:gray-500 md:text-xl/relaxed">
             Elige el plan que mejor se adapte al tamaño y objetivos de tu equipo.
           </p>
         </div>
@@ -67,13 +67,13 @@ export function PricingSection() {
               <CardContent className="flex-1 space-y-6">
                 <div className="flex items-baseline">
                   <span className="text-4xl font-bold">{plan.price}</span>
-                  {plan.period && <span className="text-muted-foreground">{plan.period}</span>}
+                  {plan.period && <span className="text-muted-foreground light:gray-500">{plan.period}</span>}
                 </div>
                 <ul className="space-y-2">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2">
                       <Check className="h-4 w-4 text-green-500" />
-                      <span className="text-muted-foreground">{feature}</span>
+                      <span className="text-muted-foreground light:gray-500">{feature}</span>
                     </li>
                   ))}
                 </ul>

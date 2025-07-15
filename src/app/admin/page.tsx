@@ -155,14 +155,14 @@ export default function AdminPanel() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-sm font-medium text-muted-foreground light:gray-500">
                 Total Envíos
               </CardTitle>
-              <Mail className="h-4 w-4 text-muted-foreground" />
+              <Mail className="h-4 w-4 text-muted-foreground light:gray-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-primary">{stats.totalSubmissions}</div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground light:gray-500">
                 Formularios recibidos
               </p>
             </CardContent>
@@ -170,14 +170,14 @@ export default function AdminPanel() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-sm font-medium text-muted-foreground light:gray-500">
                 Visitas Diarias
               </CardTitle>
-              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <Calendar className="h-4 w-4 text-muted-foreground light:gray-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-primary">{stats.dailyVisits}</div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground light:gray-500">
                 Hoy
               </p>
             </CardContent>
@@ -185,14 +185,14 @@ export default function AdminPanel() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-sm font-medium text-muted-foreground light:gray-500">
                 Visitas Semanales
               </CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <Users className="h-4 w-4 text-muted-foreground light:gray-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-primary">{stats.weeklyVisits}</div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground light:gray-500">
                 Últimos 7 días
               </p>
             </CardContent>
@@ -220,17 +220,17 @@ export default function AdminPanel() {
           <CardContent>
             <div className="overflow-x-auto">
               {formData.length === 0 ? (
-                <div className="text-center py-8 text-muted-foreground">
+                <div className="text-center py-8 text-muted-foreground light:gray-500">
                   No hay formularios recibidos aún
                 </div>
               ) : (
                 <table className="w-full">
                   <thead>
                     <tr className="border-b">
-                      <th className="text-left py-3 px-4 text-muted-foreground font-medium">Fecha</th>
-                      <th className="text-left py-3 px-4 text-muted-foreground font-medium">Nombre</th>
-                      <th className="text-left py-3 px-4 text-muted-foreground font-medium">Email</th>
-                      <th className="text-left py-3 px-4 text-muted-foreground font-medium">Mensaje</th>
+                      <th className="text-left py-3 px-4 text-muted-foreground light:gray-500 font-medium">Fecha</th>
+                      <th className="text-left py-3 px-4 text-muted-foreground light:gray-500 font-medium">Nombre</th>
+                      <th className="text-left py-3 px-4 text-muted-foreground light:gray-500 font-medium">Email</th>
+                      <th className="text-left py-3 px-4 text-muted-foreground light:gray-500 font-medium">Mensaje</th>
                     </tr>
                   </thead>
                   <tbody>

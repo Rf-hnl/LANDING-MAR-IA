@@ -40,7 +40,7 @@ export default function AdminLogin() {
           <CardTitle className="text-2xl font-bold text-foreground">
             Panel de Administración
           </CardTitle>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground light:gray-500">
             Ingresa tus credenciales para acceder
           </p>
         </CardHeader>
@@ -94,9 +94,9 @@ export default function AdminLogin() {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-muted-foreground" />
+                      <EyeOff className="h-4 w-4 text-muted-foreground light:gray-500" />
                     ) : (
-                      <Eye className="h-4 w-4 text-muted-foreground" />
+                      <Eye className="h-4 w-4 text-muted-foreground light:gray-500" />
                     )}
                   </Button>
                 </div>

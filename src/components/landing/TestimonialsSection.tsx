@@ -35,7 +35,7 @@ export function TestimonialsSection() {
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">Lo que dicen nuestros clientes</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed">
+          <p className="mx-auto max-w-[700px] text-muted-foreground light:gray-500 md:text-xl/relaxed">
             Empresas como la tuya ya están viendo resultados increíbles con MAR-IA.
           </p>
         </div>
@@ -52,7 +52,7 @@ export function TestimonialsSection() {
                 <div className="p-1 h-full">
                   <Card className="h-full bg-card/80 border">
                     <CardContent className="flex flex-col items-center text-center justify-center p-6 space-y-4">
-                      <p className="text-muted-foreground italic">&ldquo;{testimonial.quote}&rdquo;</p>
+                      <p className="text-muted-foreground light:gray-500 italic">&ldquo;{testimonial.quote}&rdquo;</p>
                       <div className="flex items-center gap-4 mt-4">
                         <Avatar>
                           <AvatarImage src={testimonial.imgSrc} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
@@ -60,7 +60,7 @@ export function TestimonialsSection() {
                         </Avatar>
                         <div>
                           <p className="font-semibold">{testimonial.name}</p>
-                          <p className="text-sm text-muted-foreground">{testimonial.title}</p>
+                          <p className="text-sm text-muted-foreground light:gray-500">{testimonial.title}</p>
                         </div>
                       </div>
                     </CardContent>
