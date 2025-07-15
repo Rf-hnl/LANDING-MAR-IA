@@ -5,7 +5,10 @@ import { db, auth } from '@/lib/firebase';
 import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import Chart from 'chart.js/auto';
 import { useRouter } from 'next/navigation';
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { BarChart3, Users, Calendar, LogOut, Mail, User } from 'lucide-react';
 
 export default function AdminPanel() {
   const [formData, setFormData] = useState<any[]>([]);
@@ -61,15 +64,26 @@ export default function AdminPanel() {
       
       setStats({
         totalSubmissions: data.length,
-        dailyVisits: data.filter(d => 
-          new Date(d.visitDate).getTime() >= today.getTime()
-        ).length,
-        weeklyVisits: data.filter(d => 
-          new Date(d.visitDate).getTime() >= weekAgo.getTime()
-        ).length,
+        dailyVisits: data.filter(d => {
+          const visitDate = d.timestamp?.toDate ? d.timestamp.toDate() : new Date(d.timestamp || d.visitDate);
+          return visitDate.getTime() >= today.getTime();
+        }).length,
+        weeklyVisits: data.filter(d => {
+          const visitDate = d.timestamp?.toDate ? d.timestamp.toDate() : new Date(d.timestamp || d.visitDate);
+          return visitDate.getTime() >= weekAgo.getTime();
+        }).length,
       });
     } catch (err) {
       setError('Error al cargar las estadísticas');
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.push('/admin/login');
+    } catch (err) {
+      setError('Error al cerrar sesión');
     }
   };
 
@@ -91,11 +105,13 @@ export default function AdminPanel() {
               data: Array.from({length: 7}, (_, i) => {
                 const date = new Date();
                 date.setDate(date.getDate() - (6 - i));
-                return formData.filter(f => 
-                  new Date(f.visitDate).toLocaleDateString() === date.toLocaleDateString()
-                ).length;
+                return formData.filter(f => {
+                  const visitDate = f.timestamp?.toDate ? f.timestamp.toDate() : new Date(f.timestamp || f.visitDate);
+                  return visitDate.toLocaleDateString() === date.toLocaleDateString();
+                }).length;
               }),
-              borderColor: 'rgb(75, 192, 192)',
+              borderColor: 'hsl(24, 95%, 53%)',
+              backgroundColor: 'hsla(24, 95%, 53%, 0.1)',
               tension: 0.1
             }]
           }
@@ -104,54 +120,138 @@ export default function AdminPanel() {
     }
   }, [loading, formData]);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-foreground">Cargando...</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Panel de Administración</h1>
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto p-6">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-foreground">Panel de Administración</h1>
+          <Button 
+            onClick={handleLogout} 
+            variant="outline" 
+            className="flex items-center gap-2"
+          >
+            <LogOut className="h-4 w-4" />
+            Cerrar Sesión
+          </Button>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-2">Total Envíos</h2>
-          <p className="text-3xl font-bold text-blue-600">{stats.totalSubmissions}</p>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-2">Visitas Diarias</h2>
-          <p className="text-3xl font-bold text-green-600">{stats.dailyVisits}</p>
-        </div>
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-2">Visitas Semanales</h2>
-          <p className="text-3xl font-bold text-purple-600">{stats.weeklyVisits}</p>
-        </div>
-      </div>
+        {/* Error Message */}
+        {error && (
+          <div className="mb-6 p-4 bg-destructive/10 border border-destructive text-destructive rounded-lg">
+            {error}
+          </div>
+        )}
 
-      <div className="bg-white p-6 rounded-lg shadow mb-6">
-        <h2 className="text-xl font-semibold mb-4">Gráfica de Visitas</h2>
-        <canvas id="visitsChart"></canvas>
-      </div>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Total Envíos
+              </CardTitle>
+              <Mail className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-primary">{stats.totalSubmissions}</div>
+              <p className="text-xs text-muted-foreground">
+                Formularios recibidos
+              </p>
+            </CardContent>
+          </Card>
 
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Formularios Recibidos</h2>
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead>
-              <tr>
-                <th className="px-6 py-3 border-b">Fecha</th>
-                <th className="px-6 py-3 border-b">Nombre</th>
-                <th className="px-6 py-3 border-b">Email</th>
-                <th className="px-6 py-3 border-b">Mensaje</th>
-              </tr>
-            </thead>
-            <tbody>
-              {formData.map((item) => (
-                <tr key={item.id} className="border-b">
-                  <td className="px-6 py-4">{new Date(item.visitDate).toLocaleString()}</td>
-                  <td className="px-6 py-4">{item.name}</td>
-                  <td className="px-6 py-4">{item.email}</td>
-                  <td className="px-6 py-4">{item.message}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Visitas Diarias
+              </CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-primary">{stats.dailyVisits}</div>
+              <p className="text-xs text-muted-foreground">
+                Hoy
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                Visitas Semanales
+              </CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-primary">{stats.weeklyVisits}</div>
+              <p className="text-xs text-muted-foreground">
+                Últimos 7 días
+              </p>
+            </CardContent>
+          </Card>
         </div>
+
+        {/* Chart */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart3 className="h-5 w-5" />
+              Gráfica de Visitas
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <canvas id="visitsChart" className="w-full h-64"></canvas>
+          </CardContent>
+        </Card>
+
+        {/* Forms Table */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Formularios Recibidos</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              {formData.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  No hay formularios recibidos aún
+                </div>
+              ) : (
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-3 px-4 text-muted-foreground font-medium">Fecha</th>
+                      <th className="text-left py-3 px-4 text-muted-foreground font-medium">Nombre</th>
+                      <th className="text-left py-3 px-4 text-muted-foreground font-medium">Email</th>
+                      <th className="text-left py-3 px-4 text-muted-foreground font-medium">Mensaje</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {formData.map((item) => (
+                      <tr key={item.id} className="border-b hover:bg-muted/50 transition-colors">
+                        <td className="py-3 px-4 text-foreground">
+                          {new Date(item.timestamp?.toDate?.() || item.timestamp).toLocaleString()}
+                        </td>
+                        <td className="py-3 px-4 text-foreground">{item.name}</td>
+                        <td className="py-3 px-4 text-foreground">{item.email}</td>
+                        <td className="py-3 px-4 text-foreground max-w-xs truncate">
+                          {item.message}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
