@@ -32,10 +32,11 @@ export function HeroSection() {
           <div className="flex flex-col justify-center space-y-8">
             <div className="space-y-4">
               <h1 className="font-headline text-4xl font-extrabold tracking-tighter sm:text-5xl xl:text-7xl/none bg-clip-text text-transparent bg-gradient-to-br from-white to-white/70">
-                El AGENTE DE IA de ventas que potencia a tu equipo
+                Tu nuevo agente de IA para ventas.
               </h1>
               <p className="max-w-[600px] text-muted-foreground dark:text-gray-400 md:text-xl">
-                Centraliza, automatiza y convierte más, todo desde un solo lugar. Desbloquea el potencial que no sabías que tenías.
+                Centraliza, automatiza y convierte más, todo desde un solo lugar.
+                Desbloquea el verdadero potencial de tu equipo comercial con IA.
               </p>
             </div>
             <div className="flex flex-col gap-4 min-[400px]:flex-row">

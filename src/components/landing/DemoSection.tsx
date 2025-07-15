@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const demoImages = [
   { src: "https://placehold.co/800x450.png", alt: "Dashboard View", dataAiHint: "dashboard analytics" },
   { src: "https://placehold.co/800x450.png", alt: "Lead Management View", dataAiHint: "crm interface" },
-  { src: "https://placehold.co/800x450.png", alt: "Automation Builder View", dataAiHint: "workflow builder" },
+  { src: "https://res.cloudinary.com/dfbwpgiev/image/upload/v1752608748/Screenshot_2025-07-15_at_2.44.30_PM_ko0uk5.png", alt: "Automation Builder View", dataAiHint: "workflow builder" },
 ];
 
 export function DemoSection() {
