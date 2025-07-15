@@ -1,0 +1,226 @@
+{
+  "hero": {
+    "title": "Your new AI agent for sales.",
+    "description": "Centralize, automate and convert more, all from one place. Unlock the true potential of your sales team with AI.",
+    "requestDemo": "Request a Demo",
+    "viewFeatures": "View Features"
+  },
+  "demo": {
+    "title": "See MAR-IA in action",
+    "description": "Discover how our platform can transform the way you sell.",
+    "viewFullDemo": "View Full Demo"
+  },
+  "features": {
+    "title": "Advanced Features",
+    "description": "Discover all the tools MAR-IA provides to revolutionize your business.",
+    "aiAutomation": {
+      "title": "AI Automation",
+      "description": "Automate responses and processes with advanced artificial intelligence."
+    },
+    "smartChat": {
+      "title": "Smart Chat", 
+      "description": "Natural conversations that adapt to each customer's context."
+    },
+    "predictiveAnalysis": {
+      "title": "Predictive Analysis",
+      "description": "Predict trends and behaviors to optimize strategies."
+    },
+    "leadManagement": {
+      "title": "Lead Management",
+      "description": "Capture, qualify and manage leads automatically."
+    },
+    "instantResponse": {
+      "title": "Instant Response",
+      "description": "Real-time responses 24 hours a day."
+    },
+    "advancedMetrics": {
+      "title": "Advanced Metrics",
+      "description": "Detailed analytics to make informed decisions."
+    },
+    "premiumSecurity": {
+      "title": "Premium Security",
+      "description": "Data protection with the highest security standards."
+    },
+    "availability247": {
+      "title": "24/7 Availability",
+      "description": "Your AI assistant working tirelessly for your business."
+    }
+  },
+  "benefits": {
+    "title": "Boost Your Sales with AI Actions",
+    "description": "From data acquisition to closing, MAR-IA accompanies you with artificial intelligence.",
+    "centralizedData": {
+      "title": "Centralized Data Collection",
+      "description": "Integrate Meta Ads, Webhooks, QR and more to not miss any opportunity."
+    },
+    "aiValuation": {
+      "title": "AI Valuation", 
+      "description": "Calculate the monetary value and score of your leads automatically."
+    },
+    "smartActions": {
+      "title": "Smart Actions",
+      "description": "Receive sales recommendations and generate welcome messages with AI."
+    },
+    "quoteGeneration": {
+      "title": "Quote Generation",
+      "description": "Create personalized quotes with AI or integrate with PandaDoc."
+    },
+    "directCommunication": {
+      "title": "Direct Communication",
+      "description": "Manage and prioritize calls for a direct and effective first connection."
+    },
+    "taskAutomation": {
+      "title": "Task Automation",
+      "description": "Save time by automating follow-ups, setup emails and more."
+    }
+  },
+  "howItWorks": {
+    "title": "Start selling in 4 simple steps",
+    "description": "Our platform is designed to be intuitive and easy to implement.",
+    "step1": {
+      "title": "1. Sign Up and Connect",
+      "description": "Create your account in minutes and connect your communication channels like WhatsApp and email."
+    },
+    "step2": {
+      "title": "2. Centralize and Organize", 
+      "description": "Import and organize all your leads on a single platform, without losing information."
+    },
+    "step3": {
+      "title": "3. Automate Follow-ups",
+      "description": "Set up workflows to send responses and reminders automatically."
+    },
+    "step4": {
+      "title": "4. Analyze and Improve",
+      "description": "Use our dashboards to understand your results and optimize your strategy."
+    }
+  },
+  "pricing": {
+    "title": "A plan for every need",
+    "description": "Choose the plan that best fits your team's size and goals.",
+    "basic": {
+      "name": "Basic",
+      "description": "For small teams just getting organized.",
+      "price": "$49",
+      "period": "/month/user",
+      "features": [
+        "Up to 500 leads",
+        "Contact management", 
+        "Email integration",
+        "Email support"
+      ],
+      "cta": "Get Started"
+    },
+    "professional": {
+      "name": "Professional",
+      "description": "For growing teams looking to automate.",
+      "price": "$99", 
+      "period": "/month/user",
+      "features": [
+        "Everything in Basic",
+        "Task automation",
+        "WhatsApp integration", 
+        "Advanced dashboards",
+        "Priority support"
+      ],
+      "cta": "Get Started",
+      "recommended": "RECOMMENDED"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "description": "For large teams with specific needs.",
+      "price": "Custom",
+      "features": [
+        "Everything in Professional",
+        "Unlimited AI assistant",
+        "Custom integrations",
+        "Dedicated account manager", 
+        "Custom SLA"
+      ],
+      "cta": "Contact Sales"
+    }
+  },
+  "contact": {
+    "title": "Ready to get started?",
+    "description": "Complete the form to request a personalized demo or receive more information.",
+    "fullName": "Full Name",
+    "namePlaceholder": "Your name",
+    "company": "Company",
+    "companyPlaceholder": "Your company name",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com", 
+    "phone": "Phone (Optional)",
+    "phonePlaceholder": "Your phone number",
+    "message": "Message (Optional)",
+    "messagePlaceholder": "Tell us about your needs...",
+    "submit": "Request Information",
+    "privacy": "By submitting, you accept our Privacy Policy. We respect your information."
+  },
+  "testimonials": {
+    "title": "What our customers say",
+    "description": "Companies like yours are already seeing incredible results with MAR-IA.",
+    "testimonial1": {
+      "quote": "MAR-IA transformed our sales process. We now close 30% more deals thanks to automation and smart tracking.",
+      "name": "Ana Pérez",
+      "title": "Sales Director, Tech Solutions"
+    },
+    "testimonial2": {
+      "quote": "The WhatsApp integration is fantastic. We can serve our customers much faster and more personally.",
+      "name": "Carlos Gómez", 
+      "title": "CEO, Inova Marketing"
+    },
+    "testimonial3": {
+      "quote": "We finally have all our leads in one place. The AI assistant helps us identify the best opportunities instantly.",
+      "name": "Sofía Rodríguez",
+      "title": "Commercial Manager, Creative Co."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "description": "Here you'll find answers to the most common questions about MAR-IA.",
+    "question1": {
+      "question": "Is my information secure in MAR-IA?",
+      "answer": "Absolutely. We use end-to-end encryption and comply with the highest data security standards to protect your information and that of your customers."
+    },
+    "question2": {
+      "question": "How difficult is it to integrate my existing channels?",
+      "answer": "It's very simple. Our onboarding process guides you step by step to connect your email accounts, WhatsApp Business and other channels in minutes, without requiring technical knowledge."
+    },
+    "question3": {
+      "question": "Will the AI assistant really help me sell more?",
+      "answer": "Yes. MAR-IA's assistant analyzes your interactions and data to give you real-time suggestions on which leads to prioritize, when to follow up, and what sales arguments to use, increasing your effectiveness."
+    },
+    "question4": {
+      "question": "What type of support do you offer?",
+      "answer": "We offer email support on all our plans. Professional and Enterprise plans include priority chat support and a dedicated account manager to ensure your success."
+    },
+    "question5": {
+      "question": "Can I change plans at any time?",
+      "answer": "Of course. You can upgrade or change your plan at any time from your account panel to adapt to your business's changing needs."
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "benefits": "Benefits",
+    "features": "Features", 
+    "howItWorks": "How It Works",
+    "pricing": "Pricing",
+    "testimonials": "Testimonials",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Login",
+    "joinNow": "Join Now"
+  },
+  "dataSources": {
+    "metaAds": "Meta Ads",
+    "importedLeads": "Imported Leads",
+    "manualLeads": "Manual Leads",
+    "businessSearch": "Business Finder",
+    "qrLinks": "QR & Links",
+    "webhook": "Webhook"
+  },
+  "common": {
+    "language": "Language",
+    "spanish": "Español",
+    "english": "English"
+  }
+}

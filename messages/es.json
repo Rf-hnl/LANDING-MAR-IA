@@ -1,0 +1,226 @@
+{
+  "hero": {
+    "title": "Tu nuevo agente de IA para ventas.",
+    "description": "Centraliza, automatiza y convierte más, todo desde un solo lugar. Desbloquea el verdadero potencial de tu equipo comercial con IA.",
+    "requestDemo": "Solicita una Demo",
+    "viewFeatures": "Ver Funcionalidades"
+  },
+  "demo": {
+    "title": "Ve MAR-IA en acción",
+    "description": "Descubre cómo nuestra plataforma puede transformar tu manera de vender.",
+    "viewFullDemo": "Ver Demo Completa"
+  },
+  "features": {
+    "title": "Funcionalidades Avanzadas",
+    "description": "Descubre todas las herramientas que MAR-IA pone a tu disposición para revolucionar tu negocio.",
+    "aiAutomation": {
+      "title": "Automatización IA",
+      "description": "Automatiza respuestas y procesos con inteligencia artificial avanzada."
+    },
+    "smartChat": {
+      "title": "Chat Inteligente",
+      "description": "Conversaciones naturales que se adaptan al contexto de cada cliente."
+    },
+    "predictiveAnalysis": {
+      "title": "Análisis Predictivo",
+      "description": "Predice tendencias y comportamientos para optimizar estrategias."
+    },
+    "leadManagement": {
+      "title": "Gestión de Leads",
+      "description": "Captura, califica y gestiona leads de forma automática."
+    },
+    "instantResponse": {
+      "title": "Respuesta Instantánea",
+      "description": "Respuestas en tiempo real las 24 horas del día."
+    },
+    "advancedMetrics": {
+      "title": "Métricas Avanzadas",
+      "description": "Analíticas detalladas para tomar decisiones informadas."
+    },
+    "premiumSecurity": {
+      "title": "Seguridad Premium",
+      "description": "Protección de datos con los más altos estándares de seguridad."
+    },
+    "availability247": {
+      "title": "Disponibilidad 24/7",
+      "description": "Tu asistente IA trabajando sin descanso para tu negocio."
+    }
+  },
+  "benefits": {
+    "title": "Potencia tus Ventas con Acciones de IA",
+    "description": "Desde la obtención del dato hasta el cierre, MAR-IA te acompaña con inteligencia artificial.",
+    "centralizedData": {
+      "title": "Obtención de Datos Centralizada",
+      "description": "Integra Meta Ads, Webhooks, QR y más para no perder ninguna oportunidad."
+    },
+    "aiValuation": {
+      "title": "Valorización con IA",
+      "description": "Calcula el valor monetario y la puntuación de tus leads automáticamente."
+    },
+    "smartActions": {
+      "title": "Acciones Inteligentes",
+      "description": "Recibe recomendaciones de venta y genera mensajes de bienvenida con IA."
+    },
+    "quoteGeneration": {
+      "title": "Generación de Cotizaciones",
+      "description": "Crea cotizaciones personalizadas con IA o intégrate con PandaDoc."
+    },
+    "directCommunication": {
+      "title": "Comunicación Directa",
+      "description": "Gestiona y prioriza llamadas para una primera conexión directa y efectiva."
+    },
+    "taskAutomation": {
+      "title": "Automatización de Tareas",
+      "description": "Ahorra tiempo automatizando seguimientos, emails de configuración y más."
+    }
+  },
+  "howItWorks": {
+    "title": "Empieza a vender en 4 simples pasos",
+    "description": "Nuestra plataforma está diseñada para ser intuitiva y fácil de implementar.",
+    "step1": {
+      "title": "1. Regístrate y Conecta",
+      "description": "Crea tu cuenta en minutos y conecta tus canales de comunicación como WhatsApp y email."
+    },
+    "step2": {
+      "title": "2. Centraliza y Organiza",
+      "description": "Importa y organiza todos tus leads en una única plataforma, sin perder información."
+    },
+    "step3": {
+      "title": "3. Automatiza Seguimientos",
+      "description": "Configura flujos de trabajo para enviar respuestas y recordatorios automáticamente."
+    },
+    "step4": {
+      "title": "4. Analiza y Mejora",
+      "description": "Usa nuestros dashboards para entender tus resultados y optimizar tu estrategia."
+    }
+  },
+  "pricing": {
+    "title": "Un plan para cada necesidad",
+    "description": "Elige el plan que mejor se adapte al tamaño y objetivos de tu equipo.",
+    "basic": {
+      "name": "Básico",
+      "description": "Para equipos pequeños que empiezan a organizarse.",
+      "price": "$49",
+      "period": "/mes/usuario",
+      "features": [
+        "Hasta 500 leads",
+        "Gestión de contactos",
+        "Integración de email",
+        "Soporte por email"
+      ],
+      "cta": "Empezar ahora"
+    },
+    "professional": {
+      "name": "Profesional",
+      "description": "Para equipos en crecimiento que buscan automatizar.",
+      "price": "$99",
+      "period": "/mes/usuario",
+      "features": [
+        "Todo en Básico",
+        "Automatización de tareas",
+        "Integración con WhatsApp",
+        "Dashboards avanzados",
+        "Soporte prioritario"
+      ],
+      "cta": "Empezar ahora",
+      "recommended": "RECOMENDADO"
+    },
+    "enterprise": {
+      "name": "Empresa",
+      "description": "Para grandes equipos con necesidades específicas.",
+      "price": "Custom",
+      "features": [
+        "Todo en Profesional",
+        "Asistente IA ilimitado",
+        "Integraciones a medida",
+        "Manager de cuenta dedicado",
+        "SLA personalizado"
+      ],
+      "cta": "Contactar Ventas"
+    }
+  },
+  "contact": {
+    "title": "¿Listo para empezar?",
+    "description": "Completa el formulario para solicitar una demo personalizada o recibir más información.",
+    "fullName": "Nombre Completo",
+    "namePlaceholder": "Tu nombre",
+    "company": "Empresa",
+    "companyPlaceholder": "Nombre de tu empresa",
+    "email": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "phone": "Teléfono (Opcional)",
+    "phonePlaceholder": "Tu número de teléfono",
+    "message": "Mensaje (Opcional)",
+    "messagePlaceholder": "Cuéntanos sobre tus necesidades...",
+    "submit": "Solicitar Información",
+    "privacy": "Al enviar, aceptas nuestra Política de Privacidad. Respetamos tu información."
+  },
+  "testimonials": {
+    "title": "Lo que dicen nuestros clientes",
+    "description": "Empresas como la tuya ya están viendo resultados increíbles con MAR-IA.",
+    "testimonial1": {
+      "quote": "MAR-IA transformó nuestro proceso de ventas. Ahora cerramos un 30% más de tratos gracias a la automatización y el seguimiento inteligente.",
+      "name": "Ana Pérez",
+      "title": "Directora de Ventas, Tech Solutions"
+    },
+    "testimonial2": {
+      "quote": "La integración con WhatsApp es fantástica. Podemos atender a nuestros clientes de forma mucho más rápida y personalizada.",
+      "name": "Carlos Gómez",
+      "title": "CEO, Inova Marketing"
+    },
+    "testimonial3": {
+      "quote": "Por fin tenemos todos nuestros leads en un solo lugar. El asistente de IA nos ayuda a identificar las mejores oportunidades al instante.",
+      "name": "Sofía Rodríguez",
+      "title": "Gerente Comercial, Creative Co."
+    }
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "description": "Aquí encontrarás respuestas a las dudas más comunes sobre MAR-IA.",
+    "question1": {
+      "question": "¿Es segura mi información en MAR-IA?",
+      "answer": "Totalmente. Utilizamos encriptación de extremo a extremo y cumplimos con los más altos estándares de seguridad de datos para proteger tu información y la de tus clientes."
+    },
+    "question2": {
+      "question": "¿Qué tan difícil es integrar mis canales existentes?",
+      "answer": "Es muy sencillo. Nuestro proceso de onboarding te guía paso a paso para conectar tus cuentas de email, WhatsApp Business y otros canales en cuestión de minutos, sin necesidad de conocimientos técnicos."
+    },
+    "question3": {
+      "question": "¿El asistente de IA realmente me ayudará a vender más?",
+      "answer": "Sí. El asistente de MAR-IA analiza tus interacciones y datos para darte sugerencias en tiempo real sobre qué leads priorizar, cuándo hacer seguimiento y qué argumentos de venta usar, aumentando tu efectividad."
+    },
+    "question4": {
+      "question": "¿Qué tipo de soporte ofrecen?",
+      "answer": "Ofrecemos soporte por email en todos nuestros planes. Los planes Profesional y Empresa cuentan con soporte prioritario por chat y un manager de cuenta dedicado para asegurar tu éxito."
+    },
+    "question5": {
+      "question": "¿Puedo cambiar de plan en cualquier momento?",
+      "answer": "Por supuesto. Puedes actualizar o cambiar tu plan en cualquier momento desde el panel de tu cuenta para adaptarte a las necesidades cambiantes de tu negocio."
+    }
+  },
+  "navigation": {
+    "home": "Inicio",
+    "benefits": "Beneficios", 
+    "features": "Funcionalidades",
+    "howItWorks": "Cómo Funciona",
+    "pricing": "Precios",
+    "testimonials": "Testimonios",
+    "faq": "FAQ",
+    "contact": "Contacto",
+    "login": "Iniciar Sesión",
+    "joinNow": "Únete Ahora"
+  },
+  "dataSources": {
+    "metaAds": "Meta Ads",
+    "importedLeads": "Leads Importados",
+    "manualLeads": "Leads Manuales",
+    "businessSearch": "Buscador de Negocios",
+    "qrLinks": "QR y Links",
+    "webhook": "Webhook"
+  },
+  "common": {
+    "language": "Idioma",
+    "spanish": "Español",
+    "english": "English"
+  }
+}

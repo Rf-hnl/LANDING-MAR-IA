@@ -1,29 +1,65 @@
-import { Header } from "@/components/landing/Header";
+"use client";
+
+import { useState, useEffect } from 'react';
 import { HeroSection } from "@/components/landing/HeroSection";
+import { DemoSection } from "@/components/landing/DemoSection";
+import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { BenefitsSection } from "@/components/landing/BenefitsSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
-import { DemoSection } from "@/components/landing/DemoSection";
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
+import { PricingSection } from "@/components/landing/PricingSection";
+import { FAQSection } from "@/components/landing/FAQSection";
 import { LeadFormSection } from "@/components/landing/LeadFormSection";
 import { Footer } from "@/components/landing/Footer";
-import { FAQSection } from "@/components/landing/FAQSection";
-import { CopyImprover } from "@/components/landing/CopyImprover";
+import { Header } from "@/components/landing/Header";
+import { IntlProvider } from 'next-intl';
+import VisitTracker from '@/components/VisitTracker';
+
+// Import messages
+import esMessages from '../../messages/es.json';
+import enMessages from '../../messages/en.json';
+
+const messages = {
+  es: esMessages,
+  en: enMessages,
+};
 
 export default function LandingPage() {
+  const [locale, setLocale] = useState<'es' | 'en'>('es');
+
+  // Load locale from localStorage on mount
+  useEffect(() => {
+    const savedLocale = localStorage.getItem('locale') as 'es' | 'en';
+    if (savedLocale) {
+      setLocale(savedLocale);
+    }
+  }, []);
+
+  const handleLanguageChange = (newLocale: 'es' | 'en') => {
+    setLocale(newLocale);
+    localStorage.setItem('locale', newLocale);
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-transparent p-4 md:p-8">
-      <div className="mx-auto w-full max-w-[90rem] flex-1 rounded-2xl bg-black/20 backdrop-blur-2xl border border-white/5 overflow-hidden flex flex-col">
-        <Header />
-        <main className="flex-1 overflow-y-auto">
+    <IntlProvider locale={locale} messages={messages[locale]}>
+      <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-orange-600/5 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(251,146,60,0.15),transparent_50%)] pointer-events-none"></div>
+        <VisitTracker />
+        <Header onLanguageChange={handleLanguageChange} />
+        <main className="flex-1 relative z-10">
           <HeroSection />
+          <DemoSection />
+          <FeaturesSection />
           <BenefitsSection />
           <HowItWorksSection />
-          <DemoSection />
+          <TestimonialsSection />
+          <PricingSection />
           <FAQSection />
           <LeadFormSection />
         </main>
-        <Footer />
-        <CopyImprover />
+        <Footer className="relative z-10" />
       </div>
-    </div>
+    </IntlProvider>
   );
 }

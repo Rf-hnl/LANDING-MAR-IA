@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "../ui/card";
 import { useFormSubmission } from "@/hooks/useFormSubmission";
+import { useTranslations } from 'next-intl';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
@@ -22,6 +23,7 @@ const formSchema = z.object({
 
 export function LeadFormSection() {
   const { toast } = useToast();
+  const t = useTranslations('contact');
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,15 +65,15 @@ export function LeadFormSection() {
   }
 
   return (
-    <section id="contact" className="py-12 sm:py-24 lg:py-32">
+    <section id="contact" className="py-12 sm:py-24 lg:py-32 bg-black">
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">¿Listo para empezar?</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground light:gray-500 md:text-xl/relaxed">
-            Completa el formulario para solicitar una demo personalizada o recibir más información.
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline text-white">{t('title')}</h2>
+          <p className="mx-auto max-w-[700px] text-gray-300 md:text-xl/relaxed font-medium">
+            {t('description')}
           </p>
         </div>
-        <Card className="max-w-2xl mx-auto shadow-lg bg-card/80 border">
+        <Card className="max-w-2xl mx-auto shadow-lg bg-white border border-gray-200">
           <CardContent className="p-8">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -81,9 +83,9 @@ export function LeadFormSection() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Nombre Completo</FormLabel>
+                        <FormLabel className="text-gray-700 font-medium">{t('fullName')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="Tu nombre" {...field} />
+                          <Input placeholder={t('namePlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -94,9 +96,9 @@ export function LeadFormSection() {
                     name="company"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Empresa</FormLabel>
+                        <FormLabel className="text-gray-700 font-medium">{t('company')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="Nombre de tu empresa" {...field} />
+                          <Input placeholder={t('companyPlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -109,9 +111,9 @@ export function LeadFormSection() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-gray-700 font-medium">{t('email')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="tu@email.com" {...field} />
+                          <Input placeholder={t('emailPlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -122,9 +124,9 @@ export function LeadFormSection() {
                     name="phone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Teléfono (Opcional)</FormLabel>
+                        <FormLabel className="text-gray-700 font-medium">{t('phone')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="Tu número de teléfono" {...field} />
+                          <Input placeholder={t('phonePlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -136,9 +138,9 @@ export function LeadFormSection() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Mensaje (Opcional)</FormLabel>
+                      <FormLabel className="text-gray-700 font-medium">{t('message')}</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="Cuéntanos sobre tus necesidades..." {...field} />
+                        <Textarea placeholder={t('messagePlaceholder')} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -146,10 +148,10 @@ export function LeadFormSection() {
                 />
                 <div className="flex flex-col items-center space-y-4">
                   <Button type="submit" size="lg" className="w-full sm:w-auto rounded-full" disabled={loading}>
-                    {loading ? "Enviando..." : "Solicitar Información"}
+                    {loading ? "Enviando..." : t('submit')}
                   </Button>
-                  <p className="text-xs text-muted-foreground light:gray-500">
-                    Al enviar, aceptas nuestra Política de Privacidad. Respetamos tu información.
+                  <p className="text-xs text-gray-600 font-medium">
+                    {t('privacy')}
                   </p>
                 </div>
               </form>

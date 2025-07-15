@@ -1,24 +1,26 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Megaphone, UploadCloud, PenSquare, Search, QrCode, Webhook, type LucideIcon } from "lucide-react";
+import { ArrowRight, Megaphone, UploadCloud, PenSquare, Search, QrCode, Webhook } from "lucide-react";
 import { Logo } from "./Logo";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { useTranslations } from 'next-intl';
 
-const dataSources: {
-  name: string;
-  icon: LucideIcon;
-  style: React.CSSProperties;
-}[] = [
-  { name: "Meta Ads", icon: Megaphone, style: { top: '15%', left: '10%', animationDelay: '0s' } },
-  { name: "Leads Importados", icon: UploadCloud, style: { top: '40%', left: '-5%', animationDelay: '0.5s' } },
-  { name: "Leads Manuales", icon: PenSquare, style: { bottom: '20%', left: '15%', animationDelay: '1s' } },
-  { name: "Buscador de Negocios", icon: Search, style: { bottom: '15%', right: '5%', animationDelay: '1.5s' } },
-  { name: "QR y Links", icon: QrCode, style: { top: '55%', right: '-8%', animationDelay: '2s' } },
-  { name: "Webhook", icon: Webhook, style: { top: '20%', right: '10%', animationDelay: '2.5s' } },
-];
 
 export function HeroSection() {
+  const t = useTranslations('hero');
+  const tDataSources = useTranslations('dataSources');
+
+  const translatedDataSources = [
+    { name: tDataSources('metaAds'), icon: Megaphone, style: { top: '15%', left: '10%', animationDelay: '0s' } },
+    { name: tDataSources('importedLeads'), icon: UploadCloud, style: { top: '40%', left: '-5%', animationDelay: '0.5s' } },
+    { name: tDataSources('manualLeads'), icon: PenSquare, style: { bottom: '20%', left: '15%', animationDelay: '1s' } },
+    { name: tDataSources('businessSearch'), icon: Search, style: { bottom: '15%', right: '5%', animationDelay: '1.5s' } },
+    { name: tDataSources('qrLinks'), icon: QrCode, style: { top: '55%', right: '-8%', animationDelay: '2s' } },
+    { name: tDataSources('webhook'), icon: Webhook, style: { top: '20%', right: '10%', animationDelay: '2.5s' } },
+  ];
+
   return (
     <section id="hero" className="relative overflow-hidden py-20 md:py-32" style={{ perspective: '1000px' }}>
       {/* Background Gradients */}
@@ -32,22 +34,21 @@ export function HeroSection() {
           <div className="flex flex-col justify-center space-y-8">
             <div className="space-y-4">
               <h1 className="font-headline text-4xl font-extrabold tracking-tighter sm:text-5xl xl:text-7xl/none bg-clip-text text-transparent bg-gradient-to-br from-white to-white/70">
-                Tu nuevo agente de IA para ventas.
+                {t('title')}
               </h1>
-              <p className="max-w-[600px] text-muted-foreground dark:text-gray-400 md:text-xl">
-                Centraliza, automatiza y convierte más, todo desde un solo lugar.
-                Desbloquea el verdadero potencial de tu equipo comercial con IA.
+              <p className="max-w-[600px] text-secondary-content md:text-xl font-medium">
+                {t('description')}
               </p>
             </div>
             <div className="flex flex-col gap-4 min-[400px]:flex-row">
               <Button size="lg" className="rounded-full px-8 group bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
                 <a href="#contact">
-                  Solicita una Demo
+                  {t('requestDemo')}
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
-               <Button size="lg" variant="outline" className="rounded-full px-8 border-primary/50 text-white hover:bg-primary/10 hover:text-white" asChild>
-                <a href="#features">Ver Funcionalidades</a>
+               <Button size="lg" variant="outline" className="rounded-full px-8 border-white/40 text-white bg-white/10 hover:text-white hover:border-white/60 font-medium" asChild>
+                <a href="#features">{t('viewFeatures')}</a>
               </Button>
             </div>
           </div>
@@ -60,7 +61,7 @@ export function HeroSection() {
             </div>
 
              {/* Floating Data sources */}
-            {dataSources.map((source) => {
+            {translatedDataSources.map((source) => {
               const Icon = source.icon;
               return (
                 <TooltipProvider key={source.name} delayDuration={0}>

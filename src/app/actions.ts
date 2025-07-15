@@ -1,20 +1,29 @@
 'use server';
 
-import { improveLandingPageCopy, type ImproveLandingPageCopyInput, type ImproveLandingPageCopyOutput } from '@/ai/flows/improve-landing-page-copy';
+import * as z from 'zod';
 
-interface ActionResult {
-    success: boolean;
-    data?: ImproveLandingPageCopyOutput;
-    error?: string;
-}
+const copyImprovementSchema = z.object({
+  originalCopy: z.string().min(1, 'Original copy is required'),
+  context: z.string().optional(),
+  tone: z.enum(['professional', 'casual', 'persuasive', 'friendly']).optional(),
+});
 
-export async function getImprovedCopy(data: ImproveLandingPageCopyInput): Promise<ActionResult> {
-    try {
-        const result = await improveLandingPageCopy(data);
-        return { success: true, data: result };
-    } catch (error) {
-        console.error(error);
-        const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-        return { success: false, error: `Failed to get improved copy: ${errorMessage}` };
-    }
+export async function getImprovedCopy(input: z.infer<typeof copyImprovementSchema>) {
+  try {
+    const { originalCopy, context = '', tone = 'professional' } = copyImprovementSchema.parse(input);
+    
+    // For now, return a simple improved version
+    // In production, this would use an AI service like Gemini
+    return {
+      success: true,
+      improvedCopy: `${originalCopy} (Improved with ${tone} tone)`,
+    };
+  } catch (error) {
+    console.error('Error improving copy:', error);
+    return {
+      success: false,
+      error: 'Failed to improve copy. Please try again.',
+      improvedCopy: input.originalCopy,
+    };
+  }
 }

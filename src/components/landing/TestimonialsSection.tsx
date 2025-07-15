@@ -1,42 +1,45 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-const testimonials = [
-  {
-    quote: "MAR-IA transformó nuestro proceso de ventas. Ahora cerramos un 30% más de tratos gracias a la automatización y el seguimiento inteligente.",
-    name: "Ana Pérez",
-    title: "Directora de Ventas, Tech Solutions",
-    avatar: "AP",
-    imgSrc: "https://placehold.co/100x100.png",
-    dataAiHint: "woman portrait"
-  },
-  {
-    quote: "La integración con WhatsApp es fantástica. Podemos atender a nuestros clientes de forma mucho más rápida y personalizada.",
-    name: "Carlos Gómez",
-    title: "CEO, Inova Marketing",
-    avatar: "CG",
-    imgSrc: "https://placehold.co/100x100.png",
-    dataAiHint: "man portrait"
-  },
-  {
-    quote: "Por fin tenemos todos nuestros leads en un solo lugar. El asistente de IA nos ayuda a identificar las mejores oportunidades al instante.",
-    name: "Sofía Rodríguez",
-    title: "Gerente Comercial, Creative Co.",
-    avatar: "SR",
-    imgSrc: "https://placehold.co/100x100.png",
-    dataAiHint: "woman professional"
-  },
-];
+import { useTranslations } from 'next-intl';
 
 export function TestimonialsSection() {
+  const t = useTranslations('testimonials');
+  
+  const translatedTestimonials = [
+    {
+      quoteKey: 'testimonial1.quote',
+      nameKey: 'testimonial1.name',
+      titleKey: 'testimonial1.title',
+      avatar: "AP",
+      imgSrc: "https://placehold.co/100x100.png",
+      dataAiHint: "woman portrait"
+    },
+    {
+      quoteKey: 'testimonial2.quote',
+      nameKey: 'testimonial2.name', 
+      titleKey: 'testimonial2.title',
+      avatar: "CG",
+      imgSrc: "https://placehold.co/100x100.png",
+      dataAiHint: "man portrait"
+    },
+    {
+      quoteKey: 'testimonial3.quote',
+      nameKey: 'testimonial3.name',
+      titleKey: 'testimonial3.title',
+      avatar: "SR",
+      imgSrc: "https://placehold.co/100x100.png",
+      dataAiHint: "woman professional"
+    },
+  ];
+
   return (
     <section id="testimonials" className="py-12 sm:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">Lo que dicen nuestros clientes</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground light:gray-500 md:text-xl/relaxed">
-            Empresas como la tuya ya están viendo resultados increíbles con MAR-IA.
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline">{t('title')}</h2>
+          <p className="mx-auto max-w-[700px] text-secondary-content md:text-xl/relaxed font-medium">
+            {t('description')}
           </p>
         </div>
         <Carousel
@@ -47,20 +50,20 @@ export function TestimonialsSection() {
           className="w-full max-w-4xl mx-auto"
         >
           <CarouselContent>
-            {testimonials.map((testimonial, index) => (
+            {translatedTestimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
                 <div className="p-1 h-full">
-                  <Card className="h-full bg-card/80 border">
+                  <Card className="h-full bg-white/30 border">
                     <CardContent className="flex flex-col items-center text-center justify-center p-6 space-y-4">
-                      <p className="text-muted-foreground light:gray-500 italic">&ldquo;{testimonial.quote}&rdquo;</p>
+                      <p className="text-secondary-content italic font-medium">&ldquo;{t(testimonial.quoteKey)}&rdquo;</p>
                       <div className="flex items-center gap-4 mt-4">
                         <Avatar>
-                          <AvatarImage src={testimonial.imgSrc} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
+                          <AvatarImage src={testimonial.imgSrc} alt={t(testimonial.nameKey)} data-ai-hint={testimonial.dataAiHint} />
                           <AvatarFallback>{testimonial.avatar}</AvatarFallback>
                         </Avatar>
                         <div>
-                          <p className="font-semibold">{testimonial.name}</p>
-                          <p className="text-sm text-muted-foreground light:gray-500">{testimonial.title}</p>
+                          <p className="font-semibold">{t(testimonial.nameKey)}</p>
+                          <p className="text-sm text-muted-content font-medium">{t(testimonial.titleKey)}</p>
                         </div>
                       </div>
                     </CardContent>

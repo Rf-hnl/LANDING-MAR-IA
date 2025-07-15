@@ -57,17 +57,16 @@ export function CopyImprover() {
     setIsLoading(true);
     setResult(null);
 
-    const featureDescriptionsArray = values.featureDescriptions.split('\n').filter(line => line.trim() !== '');
-
     const response = await getImprovedCopy({
-        ...values,
-        featureDescriptions: featureDescriptionsArray
+        originalCopy: `Hero Title: ${values.heroTitle}\nHero Subtitle: ${values.heroSubtitle}\nFeatures: ${values.featureDescriptions}\nCTA: ${values.callToAction}`,
+        context: 'Landing page copy improvement',
+        tone: 'professional'
     });
 
     setIsLoading(false);
 
-    if (response.success && response.data) {
-      setResult(response.data);
+    if (response.success) {
+      setResult({ improvedCopy: response.improvedCopy } as any);
     } else {
       toast({
         variant: "destructive",
