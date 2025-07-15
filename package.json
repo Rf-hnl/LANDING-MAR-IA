@@ -9,7 +9,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "deploy:vercel": "npm run build && npx vercel --prod",
+    "deploy:docker": "docker build -t maria-landing . && docker run -d -p 3000:3000 --env-file .env.local --name maria-landing maria-landing",
+    "deploy:compose": "docker-compose up --build -d",
+    "deploy:github": "git add . && git commit -m 'Deploy update' && git push origin main",
+    "test:all": "npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.13.0",
