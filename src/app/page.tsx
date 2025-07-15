@@ -58,7 +58,9 @@ export default function LandingPage() {
           <FAQSection />
           <LeadFormSection />
         </main>
-        <Footer className="relative z-10" />
+        <div className="relative z-10">
+          <Footer />
+        </div>
       </div>
     </IntlProvider>
   );
