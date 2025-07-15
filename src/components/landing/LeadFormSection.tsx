@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "../ui/card";
+import { useFormSubmission } from "@/hooks/useFormSubmission";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
@@ -33,13 +34,32 @@ export function LeadFormSection() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "¡Formulario Enviado!",
-      description: "Gracias por tu interés. Nos pondremos en contacto contigo pronto.",
-    });
-    form.reset();
+    const { handleSubmit, loading, error } = useFormSubmission('formSubmissions');
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const result = await handleSubmit(values);
+      if (result.success) {
+        toast({
+          title: "¡Formulario Enviado!",
+          description: "Gracias por tu interés. Nos pondremos en contacto contigo pronto.",
+        });
+        form.reset();
+      } else {
+        toast({
+          title: "Error",
+          description: "Hubo un error al enviar el formulario. Por favor, intenta de nuevo.",
+          variant: "destructive",
+        });
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      toast({
+        title: "Error",
+        description: "Hubo un error al enviar el formulario. Por favor, intenta de nuevo.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -125,7 +145,9 @@ export function LeadFormSection() {
                   )}
                 />
                 <div className="flex flex-col items-center space-y-4">
-                  <Button type="submit" size="lg" className="w-full sm:w-auto rounded-full">Solicitar Información</Button>
+                  <Button type="submit" size="lg" className="w-full sm:w-auto rounded-full" disabled={loading}>
+                    {loading ? "Enviando..." : "Solicitar Información"}
+                  </Button>
                   <p className="text-xs text-muted-foreground">
                     Al enviar, aceptas nuestra Política de Privacidad. Respetamos tu información.
                   </p>
