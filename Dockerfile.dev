@@ -4,7 +4,7 @@ FROM node:18-alpine
 RUN apk add --no-cache libc6-compat curl
 
 WORKDIR /app
-
+#fffff
 # Copy package files
 COPY package.json package-lock.json ./
 
