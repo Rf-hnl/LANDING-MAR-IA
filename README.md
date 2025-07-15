@@ -150,15 +150,117 @@ La landing page está optimizada para:
 
 ## 🚀 Deployment
 
-### Vercel (Recomendado)
+### 🟢 Vercel (Recomendado)
+
+1. **Configuración de variables de entorno:**
 ```bash
-npx vercel
+# Copia el archivo de ejemplo
+cp .env.example .env.local
+
+# Edita las variables necesarias
+GOOGLE_AI_API_KEY=your_google_ai_api_key
+NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
 ```
 
-### Build local
+2. **Deploy con Vercel CLI:**
+```bash
+# Instala Vercel CLI
+npm install -g vercel
+
+# Deploy
+vercel
+
+# O deploy desde GitHub
+# 1. Conecta tu repositorio a Vercel
+# 2. Configura las variables de entorno en el dashboard
+# 3. Deploy automático en cada push
+```
+
+3. **Deploy manual:**
+```bash
+npm run build
+npx vercel --prod
+```
+
+### 🐳 Docker Deployment
+
+#### Desarrollo local con Docker:
+```bash
+# Usando Docker Compose para desarrollo
+docker-compose -f docker-compose.dev.yml up --build
+
+# Accede a: http://localhost:3000
+```
+
+#### Producción con Docker:
+```bash
+# Build y run con Docker Compose
+docker-compose up --build -d
+
+# Con Nginx (recomendado para producción)
+docker-compose --profile production up -d
+
+# Solo la aplicación
+docker-compose up maria-landing -d
+```
+
+#### Comandos Docker útiles:
+```bash
+# Build standalone
+docker build -t maria-landing .
+
+# Run container
+docker run -p 3000:3000 --env-file .env.local maria-landing
+
+# Ver logs
+docker-compose logs -f maria-landing
+
+# Restart servicios
+docker-compose restart
+
+# Cleanup
+docker-compose down
+docker system prune -a
+```
+
+### 🌐 Deploy a GitHub (https://github.com/hypernovalabs/LANDING-MAR-IA.git)
+
+1. **Conecta tu repositorio:**
+```bash
+git remote add origin https://github.com/hypernovalabs/LANDING-MAR-IA.git
+git branch -M main
+git push -u origin main
+```
+
+2. **Configuración para auto-deploy:**
+- Vercel se conecta automáticamente a GitHub
+- Configura las variables de entorno en Vercel dashboard
+- Cada push al main despliega automáticamente
+
+### 📦 Build local para producción:
 ```bash
 npm run build
 npm run start
+```
+
+### 🔧 Variables de entorno para deployment:
+
+**Vercel:**
+- `GOOGLE_AI_API_KEY`: Tu API key de Google AI
+- `NEXT_PUBLIC_SITE_URL`: URL de tu sitio
+- `NODE_ENV`: production
+
+**Docker:**
+- Todas las variables están en `.env.local`
+- Ver `.env.example` para referencia completa
+
+### 🎯 Verificación de deployment:
+```bash
+# Health check
+curl https://your-domain.vercel.app/api/health
+
+# O para Docker local
+curl http://localhost:3000/api/health
 ```
 
 ## 🔒 Seguridad
