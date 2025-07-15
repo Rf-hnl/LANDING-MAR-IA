@@ -2,22 +2,24 @@
 
 import { useState, useEffect } from 'react';
 import { db, auth } from '@/lib/firebase';
-import { collection, query, orderBy, getDocs } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs, Timestamp } from 'firebase/firestore';
 import Chart from 'chart.js/auto';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BarChart3, Users, Calendar, LogOut, Mail, User } from 'lucide-react';
+import { BarChart3, Users, Calendar, LogOut, Mail, User, RefreshCw } from 'lucide-react';
 
 export default function AdminPanel() {
   const [formData, setFormData] = useState<any[]>([]);
+  const [allVisitsData, setAllVisitsData] = useState<any[]>([]); // New state for raw visits data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState({
     totalSubmissions: 0,
     dailyVisits: 0,
     weeklyVisits: 0,
+    totalVisits: 0,
   });
   const router = useRouter();
 
@@ -52,26 +54,31 @@ export default function AdminPanel() {
 
   const loadStats = async () => {
     try {
-      const q = query(collection(db, 'formSubmissions'));
-      const querySnapshot = await getDocs(q);
-      
+      const formSubmissionsQuery = query(collection(db, 'formSubmissions'));
+      const formSubmissionsSnapshot = await getDocs(formSubmissionsQuery);
+      const formSubmissionsData = formSubmissionsSnapshot.docs.map(doc => doc.data());
+
+      const visitsQuery = query(collection(db, 'visits'));
+      const visitsSnapshot = await getDocs(visitsQuery);
+      const visitsData = visitsSnapshot.docs.map(doc => doc.data());
+      setAllVisitsData(visitsData); // Store raw visits data
+
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const weekAgo = new Date();
       weekAgo.setDate(weekAgo.getDate() - 7);
 
-      const data = querySnapshot.docs.map(doc => doc.data());
-      
       setStats({
-        totalSubmissions: data.length,
-        dailyVisits: data.filter(d => {
+        totalSubmissions: formSubmissionsData.length,
+        dailyVisits: visitsData.filter(d => {
           const visitDate = d.timestamp?.toDate ? d.timestamp.toDate() : new Date(d.timestamp || d.visitDate);
           return visitDate.getTime() >= today.getTime();
         }).length,
-        weeklyVisits: data.filter(d => {
+        weeklyVisits: visitsData.filter(d => {
           const visitDate = d.timestamp?.toDate ? d.timestamp.toDate() : new Date(d.timestamp || d.visitDate);
           return visitDate.getTime() >= weekAgo.getTime();
         }).length,
+        totalVisits: visitsData.length,
       });
     } catch (err) {
       setError('Error al cargar las estadísticas');
@@ -89,9 +96,15 @@ export default function AdminPanel() {
 
   // Crear gráficas
   useEffect(() => {
-    if (!loading && formData.length > 0) {
+    if (!loading && allVisitsData.length > 0) {
       const ctx = document.getElementById('visitsChart') as HTMLCanvasElement;
       if (ctx) {
+        // Destroy existing chart instance if it exists
+        const existingChart = Chart.getChart(ctx);
+        if (existingChart) {
+          existingChart.destroy();
+        }
+
         new Chart(ctx, {
           type: 'line',
           data: {
@@ -100,20 +113,84 @@ export default function AdminPanel() {
               date.setDate(date.getDate() - (6 - i));
               return date.toLocaleDateString();
             }),
+            datasets: Array.from(new Set(allVisitsData.map(d => d.path))).map((path, index) => {
+              const colors = [
+                'hsl(24, 95%, 53%)', // Orange
+                'hsl(120, 70%, 50%)', // Green
+                'hsl(240, 70%, 50%)', // Blue
+                'hsl(300, 70%, 50%)', // Purple
+                'hsl(60, 70%, 50%)',  // Yellow
+                'hsl(0, 70%, 50%)',   // Red
+                'hsl(180, 70%, 50%)', // Cyan
+              ];
+              const borderColor = colors[index % colors.length];
+              const backgroundColor = borderColor.replace(')', ', 0.1)'); // Add transparency
+
+              return {
+                label: `Visitas en ${path === '/' ? 'Inicio' : path}`,
+                data: Array.from({length: 7}, (_, i) => {
+                  const date = new Date();
+                  date.setDate(date.getDate() - (6 - i));
+                  return allVisitsData.filter(d => {
+                    const visitDate = d.timestamp?.toDate ? d.timestamp.toDate() : new Date(d.timestamp || d.visitDate);
+                    return visitDate.toLocaleDateString() === date.toLocaleDateString() && d.path === path;
+                  }).length;
+                }),
+                borderColor: borderColor,
+                backgroundColor: backgroundColor,
+                tension: 0.1
+              };
+            })
+          }
+        });
+      }
+    }
+  }, [loading, allVisitsData]);
+
+  // Crear gráfica de formularios
+  useEffect(() => {
+    if (!loading && formData.length > 0) {
+      const ctx = document.getElementById('formsChart') as HTMLCanvasElement;
+      if (ctx) {
+        const existingChart = Chart.getChart(ctx);
+        if (existingChart) {
+          existingChart.destroy();
+        }
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: Array.from({length: 7}, (_, i) => {
+              const date = new Date();
+              date.setDate(date.getDate() - (6 - i));
+              return date.toLocaleDateString();
+            }),
             datasets: [{
-              label: 'Visitas Diarias',
+              label: 'Formularios Diarios',
               data: Array.from({length: 7}, (_, i) => {
                 const date = new Date();
                 date.setDate(date.getDate() - (6 - i));
                 return formData.filter(f => {
-                  const visitDate = f.timestamp?.toDate ? f.timestamp.toDate() : new Date(f.timestamp || f.visitDate);
-                  return visitDate.toLocaleDateString() === date.toLocaleDateString();
+                  const submissionDate = f.timestamp?.toDate ? f.timestamp.toDate() : new Date(f.timestamp || f.visitDate);
+                  return submissionDate.toLocaleDateString() === date.toLocaleDateString();
                 }).length;
               }),
-              borderColor: 'hsl(24, 95%, 53%)',
-              backgroundColor: 'hsla(24, 95%, 53%, 0.1)',
-              tension: 0.1
+              backgroundColor: 'hsl(210, 40%, 40%)',
+              borderColor: 'hsl(210, 40%, 50%)',
+              borderWidth: 1
             }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  precision: 0
+                }
+              }
+            }
           }
         });
       }
@@ -134,14 +211,30 @@ export default function AdminPanel() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-foreground">Panel de Administración</h1>
-          <Button 
-            onClick={handleLogout} 
-            variant="outline" 
-            className="flex items-center gap-2"
-          >
-            <LogOut className="h-4 w-4" />
-            Cerrar Sesión
-          </Button>
+          <div className="flex gap-4">
+            <Button 
+              onClick={async () => {
+                setLoading(true);
+                await loadFormData();
+                await loadStats();
+                setLoading(false);
+              }} 
+              variant="outline" 
+              className="flex items-center gap-2"
+              disabled={loading}
+            >
+              <RefreshCw className="h-4 w-4" />
+              Refrescar Datos
+            </Button>
+            <Button 
+              onClick={handleLogout} 
+              variant="outline" 
+              className="flex items-center gap-2"
+            >
+              <LogOut className="h-4 w-4" />
+              Cerrar Sesión
+            </Button>
+          </div>
         </div>
 
         {/* Error Message */}
@@ -209,6 +302,19 @@ export default function AdminPanel() {
           </CardHeader>
           <CardContent>
             <canvas id="visitsChart" className="w-full h-64"></canvas>
+          </CardContent>
+        </Card>
+
+        {/* Forms Chart */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Mail className="h-5 w-5" />
+              Gráfica de Formularios Recibidos
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <canvas id="formsChart" className="w-full h-64"></canvas>
           </CardContent>
         </Card>
 

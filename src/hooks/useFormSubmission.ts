@@ -21,10 +21,10 @@ export const useFormSubmission = (collectionName: string) => {
       // Guardar en Firestore
       await addDoc(collection(db, collectionName), submissionData);
       return { success: true };
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error submitting form:', err);
-      setError('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
-      return { success: false, error: 'Error al enviar el formulario' };
+      setError(`Error al enviar el formulario: ${err.message || 'Desconocido'}`);
+      return { success: false, error: err.message || 'Error al enviar el formulario' };
     } finally {
       setLoading(false);
     }
